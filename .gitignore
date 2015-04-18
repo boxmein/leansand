@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+
+build/leansand*
+SDL2
+
