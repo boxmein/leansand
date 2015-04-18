@@ -21,6 +21,7 @@ using namespace std;
 #define VERSION "0.0.1"
 #define WIDTH 612
 #define HEIGHT 384
+#define TARGET_FPS 60
 
 #ifndef EXIT_SUCCESS
 #define EXIT_SUCCESS 0

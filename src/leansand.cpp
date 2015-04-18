@@ -1,7 +1,21 @@
 #include "leansand.h"
 
+SDL_Window* window;
+SDL_Renderer* renderer;
+SDL_Texture* texture;
+uint32_t* pixmap;
+
+SDL_Event event;
+
+LeanSandGame game;
+
+bool quitted = false;
+unsigned int currTime;
+unsigned int deltaTime;
+
 int main (int argc, char** argv) {
-  SDL_Window* window;
+
+  // Redirect stdout / stderr to files
 
   std::ofstream new_cerr("stderr.txt");
   std::streambuf* old_cerr = cerr.rdbuf();
@@ -11,7 +25,10 @@ int main (int argc, char** argv) {
   std::streambuf* old_cout = cout.rdbuf();
   cout.rdbuf(new_cout.rdbuf());
 
+  // Startup SDL
+
   SDL_Init(SDL_INIT_VIDEO);
+  currTime = SDL_GetTicks();
 
   window = SDL_CreateWindow("leansand v" VERSION,
                             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -23,20 +40,79 @@ int main (int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
+  renderer = SDL_CreateRenderer(sdlWindow, -1, 0);
+
+  // Configure renderer
+
+  // These let us go fullscreen later on and still render at WIDTH x HEIGHT
+  SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+  SDL_RenderSetLogicalSize(renderer, WIDTH, HEIGHT);
+
+  // Create our screen texture
+
+  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
+                              SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
+
+  try {
+    pixmap = new uint32_t[WIDTH * HEIGHT];
+  } catch {
+    cerr << "Could not allocate " << WIDTH * HEIGHT << " pixels, crashing...";
+    cerr.flush();
+    return EXIT_FAILURE;
+  }
+
+  // Begin game loop
+
+  while (!quitted && game.isRunning()) {
+
+    deltaTime = SDL_GetTicks() - currTime;
+
+    if (!game.isPaused()) {
+      game.update(currTime + deltaTime, deltaTime);
+      game.draw(pixmap);
+
+      SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+      SDL_RenderClear(renderer);
+
+      SDL_UpdateTexture(texture, NULL, pixmap, WIDTH * sizeof (uint32_t));
+      SDL_RenderCopy(renderer, texture, NULL, NULL);
+    }
 
 
+    SDL_RenderPresent(renderer);
 
-  SDL_Delay(3000);
+
+    while (SDL_PollEvent(&event)) {
+      switch (event.type) {
+        case SDL_QUIT:
+          quitted = true;
+          break;
+
+        case SDL_KEYDOWN:
+          game.onKeyDown(&event);
+          break;
+      }
+    }
+
+    // Give the user 10 ms per tick to keep a nice 60 fps
+    SDL_Delay((1000/TARGET_FPS) - 10);
+
+    currTime = SDL_GetTicks();
+  }
+
+  // End game loop; the game is quitting gracefully.
 
   SDL_DestroyWindow(window);
-
 
   cout.flush();
   cerr.flush();
 
+  // Reset redirected buffers
+
   cout.rdbuf(old_cout);
   cerr.rdbuf(old_cerr);
 
+  // And done!
   SDL_Quit();
   return EXIT_SUCCESS;
 }
