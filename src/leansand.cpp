@@ -25,6 +25,22 @@ int main (int argc, char** argv) {
   std::streambuf* old_cout = cout.rdbuf();
   cout.rdbuf(new_cout.rdbuf());
 
+  // TODO: do things with command-line arguments
+
+  cout << "leansand v" VERSION << "\n";
+
+  // Display starting time
+
+  {
+    time_t    actualTime;
+    struct tm time_struct;
+    char      buf[40];
+    time(&actualTime);
+    time_struct =  *localtime(&actualTime);
+    strftime(buf, sizeof(buf), "%Y-%m-%d %X", &time_struct);
+    cout << "starting at " << buf << "\n";
+  }
+
   // Startup SDL
 
   SDL_Init(SDL_INIT_VIDEO);
