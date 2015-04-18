@@ -1,3 +1,7 @@
+
+#ifndef LEANSAND_H
+#define LEANSAND_H
+
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cmath>
@@ -23,4 +27,5 @@ using namespace std;
 
 #ifndef EXIT_FAILURE
 #define EXIT_FAILURE 1
+#endif
 #endif
