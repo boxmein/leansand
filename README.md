@@ -6,6 +6,7 @@ The purpose of this project is to develop a very lightweight but extensible C ap
 
 ## Building
 
+1. Get [SDL 2.0.3 Development Libraries][sdl]. 
 2. Extract the correct include/ and lib/ directories into ./SDL2/ [x][correct]
 3. Patch the SDL2.0.3 SDL_platform.h file with the patch file in `.`
 4. Run `make debug`
