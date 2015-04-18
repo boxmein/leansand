@@ -34,10 +34,6 @@
 *.cmake
 *.bin
 *.pdb
-build/CMakeFiles
 CMakeCache.txt
-build/Debug
-build/Win32
 
-build/leansand*
-
+build/*
