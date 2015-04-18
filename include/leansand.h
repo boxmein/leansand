@@ -28,4 +28,7 @@ using namespace std;
 #ifndef EXIT_FAILURE
 #define EXIT_FAILURE 1
 #endif
+
+#include "LeanSandGame.h"
+
 #endif
