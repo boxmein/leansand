@@ -4,9 +4,10 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <fstream>
 #include <cmath>
-#include <stdint.h>
 #include <ctime>
+#include <stdint.h>
 
 using namespace std;
 
