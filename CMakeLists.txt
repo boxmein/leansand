@@ -8,7 +8,11 @@ include_directories(include/) #Include directory
 
 find_package(SDL2 REQUIRED) #Find SDL2, uses FindSDL2.cmake from cmake/
 
-add_executable(leansand src/leansand.cpp)
+file(GLOB leansandsrc
+    "src/*.cpp"
+)
+
+add_executable(leansand ${leansandsrc})
 
 include_directories(${SDL2_INCLUDE_DIR})
 target_link_libraries(leansand ${SDL2_LIBRARY})
