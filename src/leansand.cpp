@@ -9,6 +9,7 @@ uint32_t* pixmap;
 SDL_Event event;
 
 LeanSandGame game;
+LuaGlobalAPI luaGlobal;
 
 bool quitted = false;
 
@@ -82,6 +83,10 @@ int main (int argc, char** argv) {
     cerr.flush();
     return EXIT_FAILURE;
   }
+
+  // Test script for LuaGlobalAPI
+
+  luaGlobal.runFile("autorun.lua");
 
   // Begin game loop
 
