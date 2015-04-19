@@ -22,3 +22,11 @@ echo "-- Done! --"
 echo "-- Adding cmake to PATH via .bashrc... --"
 echo "export \$PATH=/home/vagrant/cmake-3.2.2-Linux-i386/bin:\$PATH" >> /home/vagrant/.bashrc
 
+echo "-- Installing Lua 5.3 --"
+
+sudo apt-get install -y libreadline-dev
+wget -qO lua.tar.gz http://www.lua.org/ftp/lua-5.3.0.tar.gz
+tar xzf lua.tar.gz
+cd lua-5.3.0
+sudo make linux install
+
