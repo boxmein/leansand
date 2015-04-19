@@ -107,7 +107,7 @@ int main (int argc, char** argv) {
           break;
 
         case SDL_KEYDOWN:
-          game.onKeyDown(&event);
+          game.onKeyDown( (SDL_KeyboardEvent*) &event );
           break;
       }
     }
