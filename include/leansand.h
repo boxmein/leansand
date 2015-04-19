@@ -22,7 +22,7 @@ using namespace std;
 #pragma comment(lib, "lua5.3.0.lib")
 #endif
 
-#define VERSION "0.0.1"
+#define VERSION "0.0.2"
 #define WIDTH 612
 #define HEIGHT 384
 #define TARGET_FPS 60
