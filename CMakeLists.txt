@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.0)
 
 project (leansand) #Define project name
 
@@ -16,5 +16,5 @@ file(GLOB leansandsrc
 add_executable(leansand ${leansandsrc})
 
 include_directories(${SDL2_INCLUDE_DIR})
-target_link_libraries(leansand ${SDL2_LIBRARY})
+target_link_libraries(leansand ${SDL2_LIBRARY} ${LUA_LIBRARY})
 
