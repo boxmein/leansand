@@ -31,7 +31,8 @@ bool LeanSandGame::isPaused() {
 }
 
 LeanSandGame::LeanSandGame() {
-
+  running = true;
+  paused = false;
 }
 
 LeanSandGame::~LeanSandGame() {
