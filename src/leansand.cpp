@@ -9,6 +9,10 @@ SDL_Event event;
 
 LeanSandGame game;
 
+#define FPS_TH 16
+int lastFrames[FPS_TH];
+int lastFramesPos = 0;
+
 bool quitted = false;
 unsigned int currTime;
 unsigned int deltaTime;
@@ -113,9 +117,16 @@ int main (int argc, char** argv) {
     }
 
     // Give the user 10 ms per tick to keep a nice 60 fps
-    SDL_Delay((1000/TARGET_FPS) - 10);
+    //SDL_Delay((1000/TARGET_FPS) - 10);
 
     currTime = SDL_GetTicks();
+    lastFrames[lastFramesPos] = SDL_GetTicks();
+    lastFramesPos = (lastFramesPos + 1) % FPS_TH;
+    int totalDiff = 0, i;
+    for(i = lastFramesPos; i < lastFramesPos + FPS_TH - 1; i++)
+      totalDiff += lastFrames[(i + 1) % FPS_TH] - lastFrames[i % FPS_TH];
+      printf("FPS: %.0f, Delta: %.3f\n",FPS_TH * 1000.0f / totalDiff, totalDiff / (float)FPS_TH);
+
   }
 
   // End game loop; the game is quitting gracefully.
