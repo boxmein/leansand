@@ -71,8 +71,10 @@ int main (int argc, char** argv) {
 
   try {
     pixmap = new uint32_t[WIDTH * HEIGHT];
-  } catch {
-    cerr << "Could not allocate " << WIDTH * HEIGHT << " pixels, crashing...";
+  } catch (exception& e) {
+    cerr << "Could not allocate " << WIDTH * HEIGHT << " pixels, crashing...\n";
+    cerr << e.what() << endl;
+
     cerr.flush();
     return EXIT_FAILURE;
   }
