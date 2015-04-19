@@ -66,7 +66,7 @@ int main (int argc, char** argv) {
 
   // Create our screen texture
 
-  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
+  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
                               SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 
   try {
@@ -92,7 +92,7 @@ int main (int argc, char** argv) {
       SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
       SDL_RenderClear(renderer);
 
-      SDL_UpdateTexture(texture, NULL, pixmap, WIDTH * sizeof (uint32_t));
+      SDL_UpdateTexture(texture, NULL, pixmap, WIDTH * sizeof(uint32_t));
       SDL_RenderCopy(renderer, texture, NULL, NULL);
     }
 
