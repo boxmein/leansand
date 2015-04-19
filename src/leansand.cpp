@@ -3,19 +3,19 @@
 SDL_Window* window;
 SDL_Renderer* renderer;
 SDL_Texture* texture;
+
 uint32_t* pixmap;
 
 SDL_Event event;
 
 LeanSandGame game;
 
-#define FPS_TH 16
-int lastFrames[FPS_TH];
-int lastFramesPos = 0;
-
 bool quitted = false;
-unsigned int currTime;
-unsigned int deltaTime;
+
+int lastFPSReport;
+int oldTime;
+int currTime;
+int deltaTime;
 
 int main (int argc, char** argv) {
 
@@ -85,9 +85,14 @@ int main (int argc, char** argv) {
 
   // Begin game loop
 
+  lastFPSReport = SDL_GetTicks();
+
   while (!quitted && game.isRunning()) {
 
-    deltaTime = SDL_GetTicks() - currTime;
+    oldTime = currTime;
+    currTime = SDL_GetTicks();
+
+    deltaTime = currTime - oldTime;
 
     if (!game.isPaused()) {
       game.update(currTime + deltaTime, deltaTime);
@@ -100,9 +105,7 @@ int main (int argc, char** argv) {
       SDL_RenderCopy(renderer, texture, NULL, NULL);
     }
 
-
     SDL_RenderPresent(renderer);
-
 
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
@@ -116,17 +119,11 @@ int main (int argc, char** argv) {
       }
     }
 
-    // Give the user 10 ms per tick to keep a nice 60 fps
-    //SDL_Delay((1000/TARGET_FPS) - 10);
 
-    currTime = SDL_GetTicks();
-    lastFrames[lastFramesPos] = SDL_GetTicks();
-    lastFramesPos = (lastFramesPos + 1) % FPS_TH;
-    int totalDiff = 0, i;
-    for(i = lastFramesPos; i < lastFramesPos + FPS_TH - 1; i++)
-      totalDiff += lastFrames[(i + 1) % FPS_TH] - lastFrames[i % FPS_TH];
-      printf("FPS: %.0f, Delta: %.3f\n",FPS_TH * 1000.0f / totalDiff, totalDiff / (float)FPS_TH);
-
+    if (currTime - lastFPSReport >= 1000) {
+      cout << "FPS: " << 1000/deltaTime << "\n";
+      lastFPSReport = currTime;
+    }
   }
 
   // End game loop; the game is quitting gracefully.
