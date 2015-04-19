@@ -26,5 +26,5 @@ void LuaGlobalAPI::detachAPI(LuaAPI* api) {
 }
 
 void LuaGlobalAPI::runFile(string filename) {
-  luaL_load(L, filename.c_str());
+  luaL_dofile(L, filename.c_str());
 }
