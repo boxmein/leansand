@@ -3,6 +3,7 @@
 SDL_Window* window;
 SDL_Renderer* renderer;
 SDL_Texture* texture;
+
 uint32_t* pixmap;
 
 SDL_Event event;
@@ -10,8 +11,11 @@ SDL_Event event;
 LeanSandGame game;
 
 bool quitted = false;
-unsigned int currTime;
-unsigned int deltaTime;
+
+int lastFPSReport;
+int oldTime;
+int currTime;
+int deltaTime;
 
 int main (int argc, char** argv) {
 
@@ -81,9 +85,14 @@ int main (int argc, char** argv) {
 
   // Begin game loop
 
+  lastFPSReport = SDL_GetTicks();
+
   while (!quitted && game.isRunning()) {
 
-    deltaTime = SDL_GetTicks() - currTime;
+    oldTime = currTime;
+    currTime = SDL_GetTicks();
+
+    deltaTime = currTime - oldTime;
 
     if (!game.isPaused()) {
       game.update(currTime + deltaTime, deltaTime);
@@ -96,9 +105,7 @@ int main (int argc, char** argv) {
       SDL_RenderCopy(renderer, texture, NULL, NULL);
     }
 
-
     SDL_RenderPresent(renderer);
-
 
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
@@ -112,10 +119,15 @@ int main (int argc, char** argv) {
       }
     }
 
-    // Give the user 10 ms per tick to keep a nice 60 fps
-    SDL_Delay((1000/TARGET_FPS) - 10);
+    // Keep the delta time at around 16 ms at the fastest
+    if (deltaTime < 16) {
+      SDL_Delay(16 - deltaTime);
+    }
 
-    currTime = SDL_GetTicks();
+    if (currTime - lastFPSReport >= 1000) {
+      cout << "FPS: " << 1000/deltaTime << "\n";
+      lastFPSReport = currTime;
+    }
   }
 
   // End game loop; the game is quitting gracefully.
