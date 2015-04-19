@@ -56,7 +56,7 @@ int main (int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
-  renderer = SDL_CreateRenderer(sdlWindow, -1, 0);
+  renderer = SDL_CreateRenderer(window, -1, 0);
 
   // Configure renderer
 
