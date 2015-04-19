@@ -18,7 +18,10 @@ The purpose of this project is to develop a very lightweight but extensible C ap
 
 ## Usage
 
-To be decided
+### Keyboard shortcuts
+
+**Space** - Pause / unpause the simulation  
+**Escape** - Close the game immediately
 
 ## Contribution
 
