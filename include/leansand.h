@@ -5,7 +5,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <cmath>
-#include <cstdint>
+#include <stdint.h>
 #include <ctime>
 
 using namespace std;
