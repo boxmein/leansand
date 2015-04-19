@@ -8,6 +8,7 @@
 #include <cmath>
 #include <ctime>
 #include <stdint.h>
+#include <string>
 
 using namespace std;
 
@@ -35,5 +36,6 @@ using namespace std;
 #endif
 
 #include "LeanSandGame.h"
+#include "LuaGlobalAPI.h"
 
 #endif
