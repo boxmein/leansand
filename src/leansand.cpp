@@ -119,6 +119,10 @@ int main (int argc, char** argv) {
       }
     }
 
+    // Keep the delta time at around 16 ms at the fastest
+    if (deltaTime < 16) {
+      SDL_Delay(16 - deltaTime);
+    }
 
     if (currTime - lastFPSReport >= 1000) {
       cout << "FPS: " << 1000/deltaTime << "\n";
