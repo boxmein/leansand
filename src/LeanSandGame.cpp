@@ -12,7 +12,7 @@ unsigned int milliseconds = 0;
   \sa rgba()
 */
 void setPixel(uint32_t* pixmap, int x, int y, int rgba) {
-  pixmap[(y * HEIGHT) + x] = rgba;
+  pixmap[(y * WIDTH) + x] = rgba;
 }
 
 /**
