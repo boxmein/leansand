@@ -43,3 +43,6 @@ docs/*
 
 # gitkeep files keep directories checked in
 !.gitkeep
+
+# Vagrant crud
+.vagrant
