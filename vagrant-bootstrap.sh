@@ -18,3 +18,7 @@ echo "-- Installing cmake 3.2 --"
 wget -qO cmake.sh http://www.cmake.org/files/v3.2/cmake-3.2.2-Linux-i386.sh
 yes | sudo sh cmake.sh
 echo "-- Done! --"
+
+echo "-- Adding cmake to PATH via .bashrc... --"
+echo "export \$PATH=/home/vagrant/cmake-3.2.2-Linux-i386/bin:\$PATH" >> /home/vagrant/.bashrc
+
