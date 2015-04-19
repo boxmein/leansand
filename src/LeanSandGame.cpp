@@ -9,7 +9,7 @@ void LeanSandGame::update(unsigned int millis, unsigned int deltaTime) {
 }
 
 void LeanSandGame::onKeyDown(SDL_KeyboardEvent* keyboardEvent) {
-  SDL_Keysym key = keyboardEvent.keysym;
+  SDL_Keysym key = keyboardEvent->keysym;
 
   switch (key.scancode) {
     case SDL_SCANCODE_SPACE:
