@@ -18,6 +18,7 @@ using namespace std;
 #pragma once
 #pragma comment(lib, "SDL2.lib")
 #pragma comment(lib, "SDL2main.lib")
+#pragma comment(lib, "lua5.3.0.lib")
 #endif
 
 #define VERSION "0.0.1"
