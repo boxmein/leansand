@@ -29,3 +29,11 @@ bool LeanSandGame::isRunning() {
 bool LeanSandGame::isPaused() {
   return paused;
 }
+
+LeanSandGame::LeanSandGame() {
+
+}
+
+LeanSandGame::~LeanSandGame() {
+
+}
