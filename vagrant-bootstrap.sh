@@ -17,7 +17,6 @@ sudo apt-get install -y fluxbox
 echo "-- Installing cmake 3.2 --"
 wget -qO cmake.sh http://www.cmake.org/files/v3.2/cmake-3.2.2-Linux-i386.sh
 yes | sudo sh cmake.sh
-echo "-- Done! --"
 
 echo "-- Adding cmake to PATH via .bashrc... --"
 echo "export \$PATH=/home/vagrant/cmake-3.2.2-Linux-i386/bin:\$PATH" >> /home/vagrant/.bashrc
@@ -30,3 +29,5 @@ tar xzf lua.tar.gz
 cd lua-5.3.0
 sudo make linux install
 
+echo "-- Done! Use vagrant:vagrant to login, then startx for GUI --"
+echo "-- This directory is mirrored to /vagrant inside the VM, code in there --"
