@@ -20,6 +20,7 @@ using namespace std;
 #pragma comment(lib, "SDL2.lib")
 #pragma comment(lib, "SDL2main.lib")
 #pragma comment(lib, "lua5.3.0.lib")
+#pragma comment(linker, "/SUBSYSTEM:windows")
 #endif
 
 #define VERSION "0.0.1"
