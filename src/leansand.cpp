@@ -41,8 +41,8 @@ int main (int argc, char** argv) {
     struct tm timeStruct;
     char      buf[40];
     time(&actualTime);
-    time_struct =  *localtime(&actualTime);
-    strftime(buf, sizeof(buf), "%Y-%m-%d %X", &time_struct);
+    localtime_s(&timeStruct, &actualTime);
+    strftime(buf, sizeof(buf), "%Y-%m-%d %X", &timeStruct);
     cout << "starting at " << buf << "\n";
   }
 
