@@ -38,7 +38,7 @@ int main (int argc, char** argv) {
 
   {
     time_t    actualTime;
-    struct tm time_struct;
+    struct tm timeStruct;
     char      buf[40];
     time(&actualTime);
     time_struct =  *localtime(&actualTime);
