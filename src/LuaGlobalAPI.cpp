@@ -1,4 +1,4 @@
-#include "LuaGlobalAPI.h"
+#include "leansand.h"
 
 LuaGlobalAPI::LuaGlobalAPI() {
   L = luaL_newstate();

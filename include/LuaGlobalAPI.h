@@ -1,7 +1,6 @@
 #ifndef LUAGLOBALAPI_H
 #define LUAGLOBALAPI_H
 
-#include "leansand.h"
 #include "LuaAPI.h"
 #include <lua.hpp>
 
