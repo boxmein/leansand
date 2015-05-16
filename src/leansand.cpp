@@ -38,11 +38,11 @@ int main (int argc, char** argv) {
 
   {
     time_t    actualTime;
-    struct tm timeStruct;
+    struct tm time_struct;
     char      buf[40];
     time(&actualTime);
-    localtime_s(&timeStruct, &actualTime);
-    strftime(buf, sizeof(buf), "%Y-%m-%d %X", &timeStruct);
+    time_struct =  *localtime(&actualTime);
+    strftime(buf, sizeof(buf), "%Y-%m-%d %X", &time_struct);
     cout << "starting at " << buf << "\n";
   }
 
