@@ -8,6 +8,7 @@ include_directories(include/) #Include directory
 
 find_package(SDL2 REQUIRED) #Find SDL2, uses FindSDL2.cmake from cmake/
 find_package(Lua REQUIRED)
+find_package(LuaJIT REQUIRED)
 
 file(GLOB leansandsrc
     "src/*.cpp"
