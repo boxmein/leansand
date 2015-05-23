@@ -1,4 +1,4 @@
-FIND_PATH(LUAJIT_INCLUDE_DIR lua.h
+FIND_PATH(LUAJIT_INCLUDE_DIR luajit.h
   HINTS
   $ENV{LUAJIT_DIR}
   PATH_SUFFIXES include/luajit-2.0 include/luajit2.0 include/luajit include
