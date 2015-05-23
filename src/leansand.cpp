@@ -11,6 +11,10 @@ SDL_Event event;
 LeanSandGame game;
 LuaGlobalAPI luaGlobal;
 
+// Stores the current UI composition (eg stuff to render, plus locations)
+// The first element gets rendered on the bottom, the last gets rendered on top
+std::vector<UIRect> uiComp;
+
 bool quitted = false;
 
 int lastFPSReport;
@@ -74,6 +78,13 @@ int main (int argc, char** argv) {
   texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
                               SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 
+  UIRect pixmapRect;
+  // Tell SDL that pixmapRect will cover everything
+  pixmapRect.location = NULL;
+  pixmapRect.texture  = texture;
+
+  uiComp.push_back(pixmapRect);
+
   try {
     pixmap = new uint32_t[WIDTH * HEIGHT];
   } catch (exception& e) {
@@ -87,6 +98,9 @@ int main (int argc, char** argv) {
   // Test script for LuaGlobalAPI
 
   luaGlobal.runFile("autorun.lua");
+
+  // report composition length
+  cout << "UI composition is of length: " << uiComp.size() << "\n";
 
   // Begin game loop
 
@@ -107,7 +121,12 @@ int main (int argc, char** argv) {
       SDL_RenderClear(renderer);
 
       SDL_UpdateTexture(texture, NULL, pixmap, WIDTH * sizeof(uint32_t));
-      SDL_RenderCopy(renderer, texture, NULL, NULL);
+
+      // TODO: Call update functions for other UI components
+
+      for (std::vector<UIRect>::iterator it = uiComp.begin(); it != uiComp.end(); ++it) {
+        SDL_RenderCopy(renderer, it->texture, NULL, it->location);
+      }
     }
 
     SDL_RenderPresent(renderer);
