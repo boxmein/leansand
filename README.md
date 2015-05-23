@@ -6,15 +6,9 @@ The purpose of this project is to develop a very lightweight but extensible C ap
 
 ## Building
 
-1. Get [SDL 2.0.3 Development Libraries][sdl]. 
-2. Extract the correct include/ and lib/ directories into ./SDL2/ [x][correct]
-3. Patch the SDL2.0.3 SDL_platform.h file with the patch file in `.`
-4. `cd` into `build/` and run `cmake ..`
-5. run `make`
-6. `build/leansand` should work
+Check out [the guide][guide]. 
 
-[sdl]: https://libsdl.org/download-2.0.php
-[correct]: http://stackoverflow.com/a/23242705/2278637
+[guide]: https://github.com/boxmein/leansand/wiki/Compiling
 
 ## Usage
 
@@ -29,9 +23,7 @@ Pull requests, yo
 
 ## Contributors
 
-* boxmein
-* Ristovski
-* nucular?
+https://github.com/boxmein/leansand/graphs/contributors
 
 ## License
 

@@ -20,7 +20,11 @@ using namespace std;
 #pragma once
 #pragma comment(lib, "SDL2.lib")
 #pragma comment(lib, "SDL2main.lib")
-#pragma comment(lib, "lua5.3.0.lib")
+#ifdef LUAJIT
+#pragma comment(lib, "luajit.lib")
+#else
+#pragma comment(lib, "lua5.1.0.lib")
+#endif
 #pragma comment(linker, "/SUBSYSTEM:windows")
 #endif
 

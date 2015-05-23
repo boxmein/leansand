@@ -7,7 +7,14 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake") #Set c
 include_directories(include/) #Include directory
 
 find_package(SDL2 REQUIRED) #Find SDL2, uses FindSDL2.cmake from cmake/
-find_package(Lua REQUIRED)
+
+option(LUAJIT "Use LuaJIT instead of Lua 5.1" ON)
+if(LUAJIT)
+  find_package(LuaJIT REQUIRED)
+  add_definitions(-DLUAJIT)
+else()
+  find_package(Lua51 REQUIRED)
+endif()
 
 file(GLOB leansandsrc
     "src/*.cpp"
@@ -15,6 +22,6 @@ file(GLOB leansandsrc
 
 add_executable(leansand ${leansandsrc})
 
-include_directories(${SDL2_INCLUDE_DIR})
+include_directories(${SDL2_INCLUDE_DIR} ${LUA_INCLUDE_DIR})
 target_link_libraries(leansand ${SDL2_LIBRARY} ${LUA_LIBRARY})
 
