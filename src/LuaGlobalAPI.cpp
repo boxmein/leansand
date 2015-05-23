@@ -42,6 +42,30 @@ LuaGlobalAPI::LuaGlobalAPI() {
   lua_pushcfunction(L, luaPrintHook);
   lua_setglobal(L, "print");
 
+  // Create a global 'leansand' table
+
+  lua_newtable(L);
+  int ls = lua_gettop(L);
+
+  lua_pushstring(L, VERSION);
+  lua_setfield(L, ls, "version");
+
+  lua_pushnumber(L, WIDTH);
+  lua_setfield(L, ls, "width");
+
+  lua_pushnumber(L, HEIGHT);
+  lua_setfield(L, ls, "height");
+
+#ifdef LUAJIT
+  int luajit = 1;
+#else
+  int luajit = 0;
+#endif
+
+  lua_pushboolean(L, luajit);
+  lua_setfield(L, ls, "luajit");
+
+  lua_setglobal(L, "leansand");
 }
 
 LuaGlobalAPI::~LuaGlobalAPI() {
@@ -49,8 +73,17 @@ LuaGlobalAPI::~LuaGlobalAPI() {
 }
 
 void LuaGlobalAPI::attachAPI(LuaAPI* api) {
-  cout << "attaching new API to lua state\n";
-  // TODO: get definitions from the LuaAPI*, push into lua state
+  cout << "attaching new API to lua state\n" << api->name;
+
+  lua_getglobal(L, "leansand");
+  int ls = lua_gettop(L);
+
+  lua_newtable(L);
+  int table = lua_gettop(L);
+  api->attach(L, table);
+
+  lua_setfield(L, ls, api->name);
+
   // TODO: remember the definitions, so they can later be detached
 }
 
