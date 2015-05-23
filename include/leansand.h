@@ -38,5 +38,8 @@ using namespace std;
 
 #include "LeanSandGame.h"
 #include "LuaGlobalAPI.h"
+// a simple rectangle that can be drawn on the screen
+#include "UIRect.h"
+
 
 #endif
