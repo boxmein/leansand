@@ -8,13 +8,13 @@ include_directories(include/) #Include directory
 
 find_package(SDL2 REQUIRED) #Find SDL2, uses FindSDL2.cmake from cmake/
 
-option(NOJIT "Use vanilla Lua instead of LuaJIT" OFF)
-if(NOJIT)
-  find_package(Lua51 REQUIRED)
-  add_definitions(-D_NOJIT)
-else(NOJIT)
+option(LUAJIT "Use LuaJIT instead of Lua 5.1" ON)
+if(LUAJIT)
   find_package(LuaJIT REQUIRED)
-endif(NOJIT)
+  add_definitions(-DLUAJIT)
+else()
+  find_package(Lua51 REQUIRED)
+endif()
 
 file(GLOB leansandsrc
     "src/*.cpp"
