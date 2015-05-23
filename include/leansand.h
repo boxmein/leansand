@@ -36,7 +36,9 @@ using namespace std;
 #define EXIT_FAILURE 1
 #endif
 
+// main game class, eg draw() and update() functions for particles
 #include "LeanSandGame.h"
+// lua global stuff, eg version, tables, initialization, code running
 #include "LuaGlobalAPI.h"
 // a simple rectangle that can be drawn on the screen
 #include "UIRect.h"
