@@ -6,9 +6,7 @@ The purpose of this project is to develop a very lightweight but extensible C ap
 
 ## Building
 
-Check out [the guide][guide]. 
-
-[guide]: https://github.com/boxmein/leansand/wiki/Compiling
+Check out [the guide](https://github.com/boxmein/leansand/wiki/Compiling).
 
 ## Usage
 
