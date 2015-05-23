@@ -43,6 +43,7 @@ using namespace std;
 #include "LuaGlobalAPI.h"
 // a simple rectangle that can be drawn on the screen
 #include "UIRect.h"
-
+// an update-able object that can be drawn on the screen, resized & moved
+#include "UIComponent.h"
 
 #endif
