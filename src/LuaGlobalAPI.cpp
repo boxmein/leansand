@@ -11,7 +11,7 @@ int luaPrintHook(lua_State* L) {
 
   for (int i = 1; i <= argc; i++) {
     text += ' ';
-    text += luaL_tolstring(L, -1, NULL);
+    text += lua_tolstring(L, -1, NULL);
     lua_pop(L, 1);
   }
 
