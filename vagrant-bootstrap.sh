@@ -20,13 +20,12 @@ yes | sudo sh cmake.sh
 echo "-- Adding cmake to PATH via .bashrc... --"
 echo "export \$PATH=/home/vagrant/cmake-3.2.2-Linux-i386/bin:\$PATH" >> /home/vagrant/.bashrc
 
-echo "-- Installing Lua 5.3 --"
+echo "-- Installing LuaJIT --"
 
-sudo apt-get install -y libreadline-dev
-wget -qO lua.tar.gz http://www.lua.org/ftp/lua-5.3.0.tar.gz
-tar xzf lua.tar.gz
-cd lua-5.3.0
-sudo make linux install
+wget -qO luajit.tar.gz http://luajit.org/download/LuaJIT-2.0.4.tar.gz
+tar xzvf luajit.tar.gz
+cd LuaJIT-2.0.4
+make && sudo make install
 
 echo "-- Done! Use vagrant:vagrant to login, then startx for GUI --"
 echo "-- This directory is mirrored to /vagrant inside the VM, code in there --"
