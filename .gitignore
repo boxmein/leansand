@@ -46,3 +46,6 @@ docs/*
 
 # Vagrant crud
 .vagrant
+
+# Alternative LuaJIT dump directory
+luajit
