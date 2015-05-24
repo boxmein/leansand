@@ -7,13 +7,13 @@ UIComponent::UIComponent(SDL_Renderer* renderer,
 }
 
 void UIComponent::moveTo(int _x, int _y) {
-  uiRect.location.x = _x;
-  uiRect.location.y = _y;
+  uiRect.location->x = _x;
+  uiRect.location->y = _y;
 }
 
 void UIComponent::resize(SDL_Renderer* renderer, int _w, int _h) {
-  uiRect.location.w = _w;
-  uiRect.location.h = _h;
+  uiRect.location->w = _w;
+  uiRect.location->h = _h;
 
   if (uiRect.texture != 0) {
     SDL_DestroyTexture(uiRect.texture);
