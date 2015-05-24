@@ -4,7 +4,6 @@ sudo apt-get update
 
 echo "-- Installing packages... --"
 sudo apt-get install -y build-essential
-sudo apt-get install -y cmake
 sudo apt-get install -y libsdl2-dev
 sudo apt-get install -y libsdl2-image-2.0.0
 sudo apt-get install -y libsdl2-ttf-2.0.0
