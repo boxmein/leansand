@@ -1,7 +1,7 @@
 #ifndef LUAAPI_H
 #define LUAAPI_H
 
-#include "leansand.h"
+#include <lua.hpp>
 
 /**
   \brief An object representing a bunch of Lua functions / etc together.
