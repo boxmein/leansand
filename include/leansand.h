@@ -49,5 +49,7 @@ using namespace std;
 #include "UIRect.h"
 // an update-able object that can be drawn on the screen, resized & moved
 #include "UIComponent.h"
+// the first ever Lua API - UI controls!
+#include "LuaUIAPI.h"
 
 #endif
