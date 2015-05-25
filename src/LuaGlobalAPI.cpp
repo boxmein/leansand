@@ -5,17 +5,30 @@ const char* luaErrPrefix = "(lua) Error: ";
 
 int luaPrintHook(lua_State* L) {
   int argc = lua_gettop(L);
-
-
-  std::string text = "";
-
+  cout << luaPrintPrefix;
+  
   for (int i = 1; i <= argc; i++) {
-    text += ' ';
-    text += lua_tolstring(L, -1, NULL);
-    lua_pop(L, 1);
+    cout << ' ';
+    
+    int type = lua_type(L, i);
+    switch (type) {
+      case LUA_TNIL:
+        cout << "nil";
+        break;
+      case LUA_TNUMBER:
+      case LUA_TSTRING:
+        cout << lua_tostring(L, i);
+        break;
+      case LUA_TBOOLEAN:
+        cout << std::boolalpha << (bool)lua_toboolean(L, i);
+        break;
+      default:
+        cout << lua_typename(L, type) << ": " << lua_topointer(L, i);
+        break;
+    }
   }
 
-  cout << luaPrintPrefix << text << "\n";
+  cout << "\n";
   return 0;
 }
 

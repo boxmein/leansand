@@ -4,6 +4,7 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <cmath>
 #include <ctime>
