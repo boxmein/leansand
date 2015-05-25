@@ -36,6 +36,8 @@ int luaPanicHook(lua_State* L) {
   cerr << luaErrPrefix << "Panic: " << std::string(lua_tostring(L, -1));
   cerr.flush();
 
+  cleanup();
+
   // returning from here calls abort()
   // the alternative is long-jumping to somewhere, but since we depend on Lua
   // a lot then this is more acceptable
@@ -54,6 +56,9 @@ LuaAPIManager::LuaAPIManager() {
   // Hook print events to redirected cout instead of stdout
   lua_pushcfunction(L, luaPrintHook);
   lua_setglobal(L, "print");
+
+  // Hook errors outside protected environments to the panic hook
+  lua_atpanic(L, luaPanicHook);
 
   // Create a global 'leansand' table
 
@@ -106,5 +111,6 @@ void LuaAPIManager::detachAPI(LuaAPI* api) {
 }
 
 void LuaAPIManager::runFile(string filename) {
-  luaL_dofile(L, filename.c_str());
+  luaL_loadfile(L, filename.c_str());
+  lua_call(L, 0, 0);
 }

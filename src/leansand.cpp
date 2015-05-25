@@ -1,5 +1,8 @@
 #include "leansand.h"
 
+std::streambuf* old_cerr;
+std::streambuf* old_cout;
+
 SDL_Window* window;
 SDL_Renderer* renderer;
 SDL_Texture* texture;
@@ -22,16 +25,44 @@ int oldTime;
 int currTime;
 int deltaTime;
 
-int main (int argc, char** argv) {
+void cleanup() {
+  // Display ending time
+
+  {
+    time_t    actualTime;
+    struct tm time_struct;
+    char      buf[40];
+    time(&actualTime);
+    time_struct =  *localtime(&actualTime);
+    strftime(buf, sizeof(buf), "%Y-%m-%d %X", &time_struct);
+    cout << "cleaning up at " << buf << "\n";
+  }
+
+  SDL_DestroyWindow(window);
+
+  cout.flush();
+  cerr.flush();
+
+  // Reset redirected buffers
+
+  cout.rdbuf(old_cout);
+  cerr.rdbuf(old_cerr);
+
+  // And done!
+  SDL_Quit();
+  return EXIT_SUCCESS;
+}
+
+int main(int argc, char** argv) {
 
   // Redirect stdout / stderr to files
 
   std::ofstream new_cerr("stderr.txt");
-  std::streambuf* old_cerr = cerr.rdbuf();
+  old_cerr = cerr.rdbuf();
   cerr.rdbuf(new_cerr.rdbuf());
 
   std::ofstream new_cout("stdout.txt");
-  std::streambuf* old_cout = cout.rdbuf();
+  old_cout = cout.rdbuf();
   cout.rdbuf(new_cout.rdbuf());
 
   // TODO: do things with command-line arguments
@@ -156,17 +187,5 @@ int main (int argc, char** argv) {
 
   // End game loop; the game is quitting gracefully.
 
-  SDL_DestroyWindow(window);
-
-  cout.flush();
-  cerr.flush();
-
-  // Reset redirected buffers
-
-  cout.rdbuf(old_cout);
-  cerr.rdbuf(old_cerr);
-
-  // And done!
-  SDL_Quit();
-  return EXIT_SUCCESS;
+  return cleanup();
 }

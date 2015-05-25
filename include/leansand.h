@@ -53,4 +53,7 @@ using namespace std;
 // the first ever Lua API - UI controls!
 #include "LuaUIAPI.h"
 
+// cleans up and destroys stuff
+int cleanup();
+
 #endif
