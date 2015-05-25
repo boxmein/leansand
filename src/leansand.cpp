@@ -25,7 +25,7 @@ int oldTime;
 int currTime;
 int deltaTime;
 
-void cleanup() {
+int cleanup() {
   // Display ending time
 
   {
