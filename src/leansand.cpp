@@ -9,7 +9,7 @@ uint32_t* pixmap;
 SDL_Event event;
 
 LeanSandGame game;
-LuaGlobalAPI luaGlobal;
+LuaAPIManager luaGlobal;
 
 // Stores the current UI composition (eg stuff to render, plus locations)
 // The first element gets rendered on the bottom, the last gets rendered on top
@@ -95,7 +95,7 @@ int main (int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
-  // Test script for LuaGlobalAPI
+  // Test script for LuaAPIManager
 
   luaGlobal.runFile("autorun.lua");
 

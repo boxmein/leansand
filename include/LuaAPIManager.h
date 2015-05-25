@@ -13,14 +13,14 @@
   construct the object and attachAPI() as much as you need. Then, runFile() with
   a Lua script file.
 */
-class LuaGlobalAPI {
+class LuaAPIManager {
   public:
     /**
-      Constructs a new LuaGlobalAPI, with its own lua_State and empty list of
+      Constructs a new LuaAPIManager, with its own lua_State and empty list of
       APIs to be loaded later.
     */
-    LuaGlobalAPI();
-    ~LuaGlobalAPI();
+    LuaAPIManager();
+    ~LuaAPIManager();
 
     /**
       Attaches a new LuaAPI* (a thing that defines a Lua API) to the state.

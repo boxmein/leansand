@@ -42,7 +42,7 @@ int luaPanicHook(lua_State* L) {
   return 0;
 }
 
-LuaGlobalAPI::LuaGlobalAPI() {
+LuaAPIManager::LuaAPIManager() {
   L = luaL_newstate();
 
   if (L == NULL) {
@@ -81,11 +81,11 @@ LuaGlobalAPI::LuaGlobalAPI() {
   lua_setglobal(L, "leansand");
 }
 
-LuaGlobalAPI::~LuaGlobalAPI() {
+LuaAPIManager::~LuaAPIManager() {
 
 }
 
-void LuaGlobalAPI::attachAPI(LuaAPI* api) {
+void LuaAPIManager::attachAPI(LuaAPI* api) {
   cout << "attaching new API to lua state\n" << api->name;
 
   lua_getglobal(L, "leansand");
@@ -100,11 +100,11 @@ void LuaGlobalAPI::attachAPI(LuaAPI* api) {
   // TODO: remember the definitions, so they can later be detached
 }
 
-void LuaGlobalAPI::detachAPI(LuaAPI* api) {
+void LuaAPIManager::detachAPI(LuaAPI* api) {
   // TODO: detach the definitions from attachAPI
   // do we need it?
 }
 
-void LuaGlobalAPI::runFile(string filename) {
+void LuaAPIManager::runFile(string filename) {
   luaL_dofile(L, filename.c_str());
 }

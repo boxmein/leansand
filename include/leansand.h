@@ -45,7 +45,7 @@ using namespace std;
 // main game class, eg draw() and update() functions for particles
 #include "LeanSandGame.h"
 // lua global stuff, eg version, tables, initialization, code running
-#include "LuaGlobalAPI.h"
+#include "LuaAPIManager.h"
 // a simple rectangle that can be drawn on the screen
 #include "UIRect.h"
 // an update-able object that can be drawn on the screen, resized & moved
