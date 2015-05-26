@@ -13,7 +13,7 @@ file(GLOB leansandsrc
     "src/*.cpp"
 )
 
-add_executable(leansand ${leansandsrc})
+add_executable(leansand WIN32 ${leansandsrc})
 
 include_directories(${SDL2_INCLUDE_DIR})
 target_link_libraries(leansand ${SDL2_LIBRARY} ${LUA_LIBRARY})
