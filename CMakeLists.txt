@@ -17,6 +17,7 @@ else()
 endif()
 
 file(GLOB leansandsrc
+    "3rd/*.cpp"
     "src/*.cpp"
 )
 
