@@ -1,7 +1,8 @@
 #include "leansand.h"
+using namespace std;
 
-std::streambuf* old_cerr;
-std::streambuf* old_cout;
+streambuf* old_cerr;
+streambuf* old_cout;
 
 SDL_Window* window;
 SDL_Renderer* renderer;
@@ -16,7 +17,7 @@ LuaAPIManager luaGlobal;
 
 // Stores the current UI composition (eg stuff to render, plus locations)
 // The first element gets rendered on the bottom, the last gets rendered on top
-std::vector<UIRect> uiComp;
+vector<UIRect> uiComp;
 
 bool quitted = false;
 
@@ -57,11 +58,11 @@ int main(int argc, char** argv) {
 
   // Redirect stdout / stderr to files
 
-  std::ofstream new_cerr("stderr.txt");
+  ofstream new_cerr("stderr.txt");
   old_cerr = cerr.rdbuf();
   cerr.rdbuf(new_cerr.rdbuf());
 
-  std::ofstream new_cout("stdout.txt");
+  ofstream new_cout("stdout.txt");
   old_cout = cout.rdbuf();
   cout.rdbuf(new_cout.rdbuf());
 
@@ -155,7 +156,7 @@ int main(int argc, char** argv) {
 
       // TODO: Call update functions for other UI components
 
-      for (std::vector<UIRect>::iterator it = uiComp.begin(); it != uiComp.end(); ++it) {
+      for (vector<UIRect>::iterator it = uiComp.begin(); it != uiComp.end(); ++it) {
         SDL_RenderCopy(renderer, it->texture, NULL, it->location);
       }
     }

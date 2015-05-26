@@ -1,6 +1,13 @@
 #ifndef LEANSANDGAME_H
 #define LEANSANDGAME_H
 
+#include <iostream>
+
+#include <SDL2/SDL.h>
+
+#include "leansand.h"
+
+
 /**
   \brief A class containing game state and draw/update methods.
 

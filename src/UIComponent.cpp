@@ -1,4 +1,5 @@
 #include "UIComponent.h"
+using namespace std;
 
 UIComponent::UIComponent(SDL_Renderer* renderer,
                          int _x, int _y, int _w, int _h) {

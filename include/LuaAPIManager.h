@@ -1,8 +1,15 @@
-#ifndef LUAGLOBALAPI_H
-#define LUAGLOBALAPI_H
+#ifndef LUAAPIMANAGER_H
+#define LUAAPIMANAGER_H
 
-#include "LuaAPI.h"
+#include <iostream>
+#include <iomanip>
+#include <string>
+
 #include <lua.hpp>
+
+#include "leansand.h"
+#include "LuaAPI.h"
+
 
 /**
   \brief Lua state and API management
@@ -31,7 +38,7 @@ class LuaAPIManager {
     /**
       Run a file inside this Lua state
     */
-    void runFile(string filename);
+    void runFile(std::string filename);
 
   private:
     /** Global Lua state */

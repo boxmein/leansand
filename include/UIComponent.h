@@ -1,7 +1,12 @@
 #ifndef UICOMPONENT_H
 #define UICOMPONENT_H
 
-#include "leansand.h"
+#include <iostream>
+
+#include <SDL2/SDL.h>
+
+#include "UIRect.h"
+
 
 /**
   \brief A generic UI Component that will be accessible from Lua

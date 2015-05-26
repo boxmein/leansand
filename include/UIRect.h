@@ -1,6 +1,8 @@
 #ifndef UIRECT_H
 #define UIRECT_H
 
+#include <SDL2/SDL.h>
+
 /**
   \brief Data structure for an UI rectangle
 
@@ -11,7 +13,7 @@ struct UIRect {
   /** A texture containing the image data for the UI rectangle */
   SDL_Texture* texture;
   /** The UI rectangle's location on screen. NULL to cover the entire screen. */
-  SDL_Rect*    location;
+  SDL_Rect* location;
 };
 
 typedef struct UIRect UIRect;

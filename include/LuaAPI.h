@@ -3,6 +3,7 @@
 
 #include <lua.hpp>
 
+
 /**
   \brief An object representing a bunch of Lua functions / etc together.
   \sa LuaGlobalAPI

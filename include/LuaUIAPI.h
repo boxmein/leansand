@@ -1,6 +1,11 @@
 #ifndef LUAUIAPI_H
 #define LUAUIAPI_H
 
+#include <lua.hpp>
+
+#include "LuaAPI.h"
+
+
 /**
   \brief API to access user interface primitives in the game
   This is the first-ever Lua API for leansand. It can be used to define user

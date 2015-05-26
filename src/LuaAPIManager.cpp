@@ -1,4 +1,5 @@
-#include "leansand.h"
+#include "LuaAPIManager.h"
+using namespace std;
 
 const char* luaPrintPrefix = "(lua): ";
 const char* luaErrPrefix = "(lua) Error: ";
@@ -20,7 +21,7 @@ int luaPrintHook(lua_State* L) {
         cout << lua_tostring(L, i);
         break;
       case LUA_TBOOLEAN:
-        cout << std::boolalpha << (bool)lua_toboolean(L, i);
+        cout << boolalpha << (bool)lua_toboolean(L, i);
         break;
       default:
         cout << lua_typename(L, type) << ": " << lua_topointer(L, i);
@@ -33,7 +34,7 @@ int luaPrintHook(lua_State* L) {
 }
 
 int luaPanicHook(lua_State* L) {
-  cerr << luaErrPrefix << "Panic: " << std::string(lua_tostring(L, -1));
+  cerr << luaErrPrefix << "Panic: " << string(lua_tostring(L, -1));
   cerr.flush();
 
   cleanup();

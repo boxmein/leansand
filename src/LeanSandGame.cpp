@@ -1,4 +1,5 @@
-#include "leansand.h"
+#include "LeanSandGame.h"
+using namespace std;
 
 unsigned int milliseconds = 0;
 /**

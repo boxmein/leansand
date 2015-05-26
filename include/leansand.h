@@ -1,18 +1,18 @@
-
 #ifndef LEANSAND_H
 #define LEANSAND_H
 
-#include <SDL2/SDL.h>
 #include <iostream>
-#include <iomanip>
 #include <fstream>
-#include <cmath>
 #include <ctime>
-#include <stdint.h>
 #include <string>
 #include <vector>
 
-using namespace std;
+#include <SDL2/SDL.h>
+
+#include "LeanSandGame.h"
+#include "LuaAPIManager.h"
+#include "UIRect.h"
+
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -42,18 +42,6 @@ using namespace std;
 #define EXIT_FAILURE 1
 #endif
 
-// main game class, eg draw() and update() functions for particles
-#include "LeanSandGame.h"
-// lua global stuff, eg version, tables, initialization, code running
-#include "LuaAPIManager.h"
-// a simple rectangle that can be drawn on the screen
-#include "UIRect.h"
-// an update-able object that can be drawn on the screen, resized & moved
-#include "UIComponent.h"
-// the first ever Lua API - UI controls!
-#include "LuaUIAPI.h"
-
-// cleans up and destroys stuff
 int cleanup();
 
 #endif
