@@ -4,6 +4,7 @@
 
 #include <lua.hpp>
 #include <string.h> // For strlen
+#include <typeinfo>
 
 template <class T> class Luna {
   public:
@@ -30,26 +31,8 @@ template <class T> class Luna {
     This func will raise an exception if the argument is not of the correct type.
 */
   static T* check(lua_State * L, int narg) {
-    T** obj = static_cast <T **>(luaL_checkudata(L, narg, T::className));
+    T** obj = static_cast <T **>(luaL_checkudata(L, narg, typeid(T).name()));
     if ( !obj )
-      return NULL; // lightcheck returns nullptr if not found.
-    return *obj; // pointer to T object
-  }
-
-/*
-  @ lightcheck
-  Arguments:
-    * L - Lua State
-    * narg - Position to check
-
-  Description:
-    Retrieves a wrapped class from the arguments passed to the func, specified by narg (position).
-    This func will return nullptr if the argument is not of the correct type.  Useful for supporting
-    multiple types of arguments passed to the func
-*/ 
-  static T* lightcheck(lua_State * L, int narg) {
-    T** obj = static_cast <T **>(luaL_testudata(L, narg, T::className));
-    if (!obj)
       return NULL; // lightcheck returns nullptr if not found.
     return *obj; // pointer to T object
   }
@@ -81,7 +64,57 @@ template <class T> class Luna {
       lua_setglobal(L, T::className);
     }
 
-    luaL_newmetatable(L, T::className);
+    luaL_newmetatable(L, typeid(T).name());
+    int metatable = lua_gettop(L);
+
+    lua_pushstring(L, "__gc");
+    lua_pushcfunction(L, &Luna < T >::gc_obj);
+    lua_settable(L, metatable);
+
+    lua_pushstring(L, "__tostring");
+    lua_pushcfunction(L, &Luna < T >::to_string);
+    lua_settable(L, metatable);
+
+    lua_pushstring(L, "__eq"); // To be able to compare two Luna objects (not natively possible with full userdata)
+    lua_pushcfunction(L, &Luna < T >::equals);
+    lua_settable(L, metatable);
+
+    lua_pushstring(L, "__index");
+    lua_pushcfunction(L, &Luna < T >::property_getter);
+    lua_settable(L, metatable);
+
+    lua_pushstring(L, "__newindex");
+    lua_pushcfunction(L, &Luna < T >::property_setter);
+    lua_settable(L, metatable);
+
+    for (int i = 0; T::properties[i].name; i++) { // Register some properties in it
+      lua_pushstring(L, T::properties[i].name); // Having some string associated with them
+      lua_pushnumber(L, i); // And a number indexing which property it is
+      lua_settable(L, metatable);
+    }
+
+    for (int i = 0; T::methods[i].name; i++) {
+      lua_pushstring(L, T::methods[i].name); // Register some functions in it
+      lua_pushnumber(L, i | (1 << 8)); // Add a number indexing which func it is
+      lua_settable(L, metatable); //
+    }
+  }
+
+/*
+  @ Register
+  Arguments:
+    * L - Lua State
+    * index - Index of table on stack to load into
+
+  Description:
+    Registers your class with Lua. Overload for easier namespacing.
+*/
+  // REGISTER CLASS INSIDE TABLE ON STACK
+  static void Register(lua_State * L, int index) {
+    lua_pushcfunction(L, &Luna<T>::constructor);
+    lua_setfield(L, index, T::className);
+
+    luaL_newmetatable(L, typeid(T).name());
     int metatable = lua_gettop(L);
 
     lua_pushstring(L, "__gc");
@@ -127,7 +160,7 @@ template <class T> class Luna {
     T** a = static_cast<T**>(lua_newuserdata(L, sizeof(T *))); // Push value = userdata
     *a = ap;
 
-    luaL_getmetatable(L, T::className); // Fetch global metatable T::classname
+    luaL_getmetatable(L, typeid(T).name()); // Fetch global metatable T::classname
     lua_setmetatable(L, -2);
     return 1;
   }
@@ -145,7 +178,7 @@ template <class T> class Luna {
     T **a = (T **) lua_newuserdata(L, sizeof(T *)); // Create userdata
     *a = instance;
 
-    luaL_getmetatable(L, T::className);
+    luaL_getmetatable(L, typeid(T).name());
     lua_setmetatable(L, -2);
   }
 

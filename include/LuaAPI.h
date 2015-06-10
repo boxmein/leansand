@@ -10,12 +10,14 @@
 */
 class LuaAPI {
   public:
-    /** Name of the API (eg for leansand.ui the name = "ui") **/
-    char* name;
     /** You can put stuff in here, but this doesn't initialize the Lua structure */
     LuaAPI();
-    ~LuaAPI();
+    virtual ~LuaAPI();
 
+    /**
+      \brief Name of the API (eg for leansand.ui the name = "ui")
+    */
+    virtual const char* getName() = 0;
     /**
       \brief Called when the API is attached onto the LuaGlobalAPI.
       There will be a lua_newtable() at index table_index in the Lua stack, so
@@ -26,11 +28,11 @@ class LuaAPI {
       \param L the lua state
       \param table_index the index in the stack containing a table just for this api
     */
-    void attach(lua_State* L, int table_index);
+    virtual void attach(lua_State* L, int table_index) = 0;
     /**
       \brief TODO: implement module un-loading
     */
-    void detach(lua_State* L, int table_index);
+    virtual void detach(lua_State* L, int table_index) = 0;
 };
 
 #endif

@@ -1,12 +1,12 @@
 #include "leansand.h"
 using namespace std;
 
-streambuf* old_cerr;
-streambuf* old_cout;
-
 SDL_Window* window;
 SDL_Renderer* renderer;
 SDL_Texture* texture;
+
+streambuf* old_cerr;
+streambuf* old_cout;
 
 uint32_t* pixmap;
 
@@ -14,6 +14,8 @@ SDL_Event event;
 
 LeanSandGame game;
 LuaAPIManager luaGlobal;
+
+LuaUIAPI luaUIAPI;
 
 // Stores the current UI composition (eg stuff to render, plus locations)
 // The first element gets rendered on the bottom, the last gets rendered on top
@@ -126,6 +128,11 @@ int main(int argc, char** argv) {
     cerr.flush();
     return EXIT_FAILURE;
   }
+
+  // Attach all Lua APIs
+
+  LuaAPI *ptr = static_cast<LuaAPI*>(&luaUIAPI);
+  luaGlobal.attachAPI(ptr);
 
   // Test script for LuaAPIManager
 

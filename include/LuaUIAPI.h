@@ -4,6 +4,7 @@
 #include <lua.hpp>
 
 #include "LuaAPI.h"
+#include "UIComponent.h"
 
 
 /**
@@ -18,6 +19,8 @@ class LuaUIAPI : public LuaAPI {
   public:
     LuaUIAPI();
     ~LuaUIAPI();
+    const char* getName();
+
     void attach(lua_State* L, int table_index);
     void detach(lua_State* L, int table_index);
 };

@@ -92,7 +92,8 @@ LuaAPIManager::~LuaAPIManager() {
 }
 
 void LuaAPIManager::attachAPI(LuaAPI* api) {
-  cout << "attaching new API to lua state\n" << api->name;
+  cout << "attaching new API to lua state: " << api->getName() << "\n";
+  cout.flush();
 
   lua_getglobal(L, "leansand");
   int ls = lua_gettop(L);
@@ -101,7 +102,7 @@ void LuaAPIManager::attachAPI(LuaAPI* api) {
   int table = lua_gettop(L);
   api->attach(L, table);
 
-  lua_setfield(L, ls, api->name);
+  lua_setfield(L, ls, api->getName());
 
   // TODO: remember the definitions, so they can later be detached
 }

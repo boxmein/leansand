@@ -9,6 +9,7 @@
 
 #include "leansand.h"
 #include "LuaAPI.h"
+#include "LuaUIAPI.h"
 
 
 /**
