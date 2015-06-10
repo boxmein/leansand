@@ -112,6 +112,9 @@ void LuaAPIManager::detachAPI(LuaAPI* api) {
 }
 
 void LuaAPIManager::runFile(string filename) {
-  luaL_loadfile(L, filename.c_str());
-  lua_call(L, 0, 0);
+  struct stat buffer;
+  if(stat(filename.c_str(),&buffer)==0){
+    luaL_loadfile(L, filename.c_str());
+    lua_call(L, 0, 0);
+  }
 }
