@@ -54,6 +54,13 @@ LuaAPIManager::LuaAPIManager() {
 
   luaL_openlibs(L);
 
+  // Add ./lua to the package search path
+#ifdef _WIN32
+  addPackagePath("!/lua/?.lua;!/lua/?/init.lua");
+#else
+  addPackagePath("./lua/?.lua;./lua/?/init.lua");
+#endif
+
   // Hook print events to redirected cout instead of stdout
   lua_pushcfunction(L, luaPrintHook);
   lua_setglobal(L, "print");
