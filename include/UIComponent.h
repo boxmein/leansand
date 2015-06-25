@@ -6,7 +6,6 @@
 #include <SDL2/SDL.h>
 
 #include "UIRect.h"
-#include "../3rd/LunaFive.cpp"
 
 
 /**
@@ -33,7 +32,6 @@ class UIComponent {
       \sa moveTo(), resize()
     */
     UIComponent(SDL_Renderer* ren, int _x, int _y, int _w, int _h);
-    UIComponent(lua_State *L);
     /**
       Free the texture associated with this component.
     */
@@ -44,7 +42,6 @@ class UIComponent {
       \param _y the desired Y coordinate
     */
     void moveTo(int _x, int _y);
-    int moveTo(lua_State *L);
     /**
       \brief Resize the inner texture.
       Resize the texture this component uses. This means recreating the texture,
@@ -54,16 +51,11 @@ class UIComponent {
       \param _h new height of the texture
     */
     void resize(SDL_Renderer* ren, int _w, int _h);
-    int resize(lua_State *L);
 
     /**
       \brief return the UIRect to render
     */
     UIRect *getRect(/* fgt */);
-
-    static const char className[];
-    static const Luna<UIComponent>::PropertyType properties[];
-    static const Luna<UIComponent>::FunctionType methods[];
 };
 
 #endif

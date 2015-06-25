@@ -91,27 +91,6 @@ LuaAPIManager::~LuaAPIManager() {
 
 }
 
-void LuaAPIManager::attachAPI(LuaAPI* api) {
-  cout << "attaching new API to lua state: " << api->getName() << "\n";
-  cout.flush();
-
-  lua_getglobal(L, "leansand");
-  int ls = lua_gettop(L);
-
-  lua_newtable(L);
-  int table = lua_gettop(L);
-  api->attach(L, table);
-
-  lua_setfield(L, ls, api->getName());
-
-  // TODO: remember the definitions, so they can later be detached
-}
-
-void LuaAPIManager::detachAPI(LuaAPI* api) {
-  // TODO: detach the definitions from attachAPI
-  // do we need it?
-}
-
 void LuaAPIManager::runFile(string filename) {
   struct stat buffer;
   if(stat(filename.c_str(),&buffer)==0){

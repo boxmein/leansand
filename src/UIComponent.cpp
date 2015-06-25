@@ -6,17 +6,10 @@ UIComponent::UIComponent(SDL_Renderer* ren,
   this->moveTo(_x, _y);
   this->resize(ren, _w, _h);
 }
-UIComponent::UIComponent(lua_State *L) {
-  cout << "in constructor\n";
-}
 
 void UIComponent::moveTo(int _x, int _y) {
   uiRect.location->x = _x;
   uiRect.location->y = _y;
-}
-int UIComponent::moveTo(lua_State *L) {
-  cout << "in moveTo\n";
-  return 0;
 }
 
 void UIComponent::resize(SDL_Renderer* ren, int _w, int _h) {
@@ -34,22 +27,7 @@ void UIComponent::resize(SDL_Renderer* ren, int _w, int _h) {
     cerr << "new UI texture invalid - " << SDL_GetError();
   }
 }
-int UIComponent::resize(lua_State *L) {
-  cout << "in resize\n";
-  return 0;
-}
 
 UIComponent::~UIComponent() {
   SDL_DestroyTexture(uiRect.texture);
 }
-
-
-const char UIComponent::className[] = "UIComponent";
-const Luna<UIComponent>::PropertyType UIComponent::properties[] = {
-  {0, 0}
-};
-const Luna<UIComponent>::FunctionType UIComponent::methods[] = {
-  {"moveTo", &UIComponent::moveTo},
-  {"resize", &UIComponent::resize},
-  {0, 0}
-};

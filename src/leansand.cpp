@@ -15,8 +15,6 @@ SDL_Event event;
 LeanSandGame game;
 LuaAPIManager luaGlobal;
 
-LuaUIAPI luaUIAPI;
-
 // Stores the current UI composition (eg stuff to render, plus locations)
 // The first element gets rendered on the bottom, the last gets rendered on top
 vector<UIRect> uiComp;
@@ -128,11 +126,6 @@ int main(int argc, char** argv) {
     cerr.flush();
     return EXIT_FAILURE;
   }
-
-  // Attach all Lua APIs
-
-  LuaAPI *ptr = static_cast<LuaAPI*>(&luaUIAPI);
-  luaGlobal.attachAPI(ptr);
 
   // Test script for LuaAPIManager
 

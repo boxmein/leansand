@@ -9,8 +9,6 @@
 #include <lua.hpp>
 
 #include "leansand.h"
-#include "LuaAPI.h"
-#include "LuaUIAPI.h"
 
 
 /**
@@ -30,12 +28,6 @@ class LuaAPIManager {
     */
     LuaAPIManager();
     ~LuaAPIManager();
-
-    /**
-      Attaches a new LuaAPI* (a thing that defines a Lua API) to the state.
-    */
-    void attachAPI(LuaAPI* api);
-    void detachAPI(LuaAPI* api);
 
     /**
       Run a file inside this Lua state
