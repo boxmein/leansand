@@ -128,7 +128,7 @@ int main(int argc, char** argv) {
   }
 
   // Start running our script
-  luaGlobal.runFile("autorun.lua");
+  luaGlobal.runFile("lua/autorun.lua");
 
   // report composition length
   cout << "UI composition is of length: " << uiComp.size() << "\n";

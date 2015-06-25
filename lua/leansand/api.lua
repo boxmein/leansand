@@ -2,7 +2,7 @@ local api = {}
 local ffi = require("ffi")
 
 function api.include(name)
-  local file = io.open("leansand/include/" .. name, "r")
+  local file = io.open("lua/include/" .. name, "r")
 
   local line, match
   while true do
