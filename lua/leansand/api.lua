@@ -1,4 +1,5 @@
 local api = {}
+local leansand = require("leansand")
 local ffi = require("ffi")
 
 function api.include(name)
