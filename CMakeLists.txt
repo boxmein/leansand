@@ -19,6 +19,8 @@ endif()
 file(GLOB leansandsrc
     "src/*.cpp"
 )
+file(COPY "lua/" DESTINATION ".")
+file(COPY "include/" DESTINATION "./leansand/include")
 
 add_executable(leansand WIN32 ${leansandsrc})
 

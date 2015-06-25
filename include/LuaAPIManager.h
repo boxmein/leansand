@@ -30,6 +30,11 @@ class LuaAPIManager {
     ~LuaAPIManager();
 
     /**
+      Add a string to package.path (that's where Lua searches for its modules)
+    */
+    void addPackagePath(std::string path);
+
+    /**
       Run a file inside this Lua state
     */
     void runFile(std::string filename);

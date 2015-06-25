@@ -127,8 +127,7 @@ int main(int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
-  // Test script for LuaAPIManager
-
+  // Start running our script
   luaGlobal.runFile("autorun.lua");
 
   // report composition length
@@ -189,4 +188,8 @@ int main(int argc, char** argv) {
   // End game loop; the game is quitting gracefully.
 
   return cleanup();
+}
+
+LUAAPI void luatest(const char* text) {
+  cout << "it works: " << text << "\n";
 }

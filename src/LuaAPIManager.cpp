@@ -60,35 +60,22 @@ LuaAPIManager::LuaAPIManager() {
 
   // Hook errors outside protected environments to the panic hook
   lua_atpanic(L, luaPanicHook);
-
-  // Create a global 'leansand' table
-
-  lua_newtable(L);
-  int ls = lua_gettop(L);
-
-  lua_pushstring(L, VERSION);
-  lua_setfield(L, ls, "version");
-
-  lua_pushnumber(L, WIDTH);
-  lua_setfield(L, ls, "width");
-
-  lua_pushnumber(L, HEIGHT);
-  lua_setfield(L, ls, "height");
-
-#ifdef LUAJIT
-  int luajit = 1;
-#else
-  int luajit = 0;
-#endif
-
-  lua_pushboolean(L, luajit);
-  lua_setfield(L, ls, "luajit");
-
-  lua_setglobal(L, "leansand");
 }
 
 LuaAPIManager::~LuaAPIManager() {
 
+}
+
+void LuaAPIManager::addPackagePath(string path) {
+  lua_getglobal(L, "package");
+  lua_getfield(L, -1, "path");
+  std::string current = lua_tostring(L, -1);
+  current.append(";");
+  current.append(path);
+  lua_pop(L, 1);
+  lua_pushstring(L, current.c_str());
+  lua_setfield(L, -2, "path");
+  lua_pop(L, 1);
 }
 
 void LuaAPIManager::runFile(string filename) {

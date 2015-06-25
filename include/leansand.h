@@ -42,6 +42,14 @@
 #define EXIT_FAILURE 1
 #endif
 
+#ifdef _WIN32
+#define LUAAPI extern "C" __declspec(dllexport)
+#else
+#define LUAAPI extern "C" __attribute__ ((visibility("default")))
+#endif
+
 int cleanup();
+
+LUAAPI void luatest(const char* text);
 
 #endif
