@@ -1,8 +1,8 @@
 local leansand = {}
 local ffi = require("ffi")
 
-leansand.utils = require("leansand.utils")
+leansand.api = require("leansand.api")
 
-leansand.utils.include("leansand.h")
+leansand.api.include("leansand.h")
 
 return leansand

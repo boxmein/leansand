@@ -1,7 +1,7 @@
-local utils = {}
+local api = {}
 local ffi = require("ffi")
 
-function utils.include(name)
+function api.include(name)
   local file = io.open("leansand/include/" .. name, "r")
 
   local line, match
@@ -18,4 +18,4 @@ function utils.include(name)
   file:close()
 end
 
-return utils
+return api
